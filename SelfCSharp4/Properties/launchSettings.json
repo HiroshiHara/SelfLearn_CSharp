@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SelfCSharp4": {
+      "commandName": "Project",
+      "commandLineArgs": "CL引数1 CL引数2 CL引数3"
+    }
+  }
+}

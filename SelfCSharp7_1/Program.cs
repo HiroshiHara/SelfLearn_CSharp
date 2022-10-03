@@ -20,6 +20,15 @@ namespace SelfCSharp7_1
         static void Main(string[] args)
         {
             Console.WriteLine("heelo");
+            // 引数の規定値
+            Animal dog1 = new Animal();
+            Animal dog2 = new Animal("わんわん");
+            dog1.Show();
+            dog2.Show();
+            // 名前付き引数
+            Animal dog3 = new Animal(howling: "グルル");
+            dog3.Show();
+            Console.WriteLine(dog3.Sum(1, 2, 3));
         }
     }
 }

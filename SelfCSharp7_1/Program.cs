@@ -19,6 +19,7 @@ namespace SelfCSharp7_1
 
         static void Main(string[] args)
         {
+            Console.WriteLine("heelo");
         }
     }
 }

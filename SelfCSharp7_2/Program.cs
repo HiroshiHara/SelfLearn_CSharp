@@ -275,4 +275,23 @@ namespace SelfCSharp7_2
             return this.GetEnumerator();
         }
     }
+
+    class Hamster
+    {
+        // privateでない理由
+        // privateの場合、同クラス内からであれば変更可能になるため
+        // インスタンス生成時にのみ値を設定可能にしている
+        readonly string name;
+        readonly int age;
+        public Hamster() : this("権兵衛", 0) { }
+        public Hamster(string name, int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+        public string Show(string format = "{0}は{1}歳です!")
+        {
+            return String.Format(format, this.name, this.age);
+        }
+    }
 }

@@ -33,6 +33,20 @@ namespace SelfCSharp8_1
             //tap.Pi = 3.2;
             Console.WriteLine(tap.Width);
             Console.WriteLine(tap.Height);
+
+            Console.WriteLine("---------------------------");
+
+            // インデクサーの利用
+            var idxAry = new IndexerArray(5);
+            Console.WriteLine(idxAry.Length);
+            idxAry[0] = 0;
+            idxAry[1] = 100;
+            idxAry[2] = 200;
+            idxAry[3] = 300;
+            idxAry[4] = 400;
+            idxAry[5] = 999;
+            Console.WriteLine(idxAry[-1]);
+            Console.WriteLine(idxAry[0]);
         }
     }
 }

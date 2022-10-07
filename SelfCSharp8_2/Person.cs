@@ -22,7 +22,7 @@ namespace SelfCSharp8_2
 
         public void Show()
         {
-            Console.WriteLine($"名前は{this.LastName}{this.LastName}です。");
+            Console.WriteLine($"名前は{this.FirstName}{this.LastName}です。");
         }
         
         // virtualでオーバーライド可能にする

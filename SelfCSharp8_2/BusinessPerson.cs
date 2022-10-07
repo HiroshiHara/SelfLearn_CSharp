@@ -16,7 +16,7 @@ namespace SelfCSharp8_2
 
         public void ShowWork()
         {
-            Console.WriteLine($"{this.LastName}{this.FirstName}は働きます。");
+            Console.WriteLine($"{this.FirstName}{this.LastName}は働きます。");
         }
 
         // newキーワードで親クラスの同名メンバを隠蔽(≠オーバーライド)
@@ -24,7 +24,7 @@ namespace SelfCSharp8_2
         // ポリモーフィズムが動作しないので原則使用しない
         public new void Show()
         {
-            Console.WriteLine($"{this.LastName}{this.FirstName}は会社員です。");
+            Console.WriteLine($"{this.FirstName}{this.LastName}は会社員です。");
         }
 
         // overrideキーワードでvirtualメソッドをオーバーライド

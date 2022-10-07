@@ -38,7 +38,7 @@ namespace SelfCSharp8_1
 
             // インデクサーの利用
             var idxAry = new IndexerArray(5);
-            Console.WriteLine(idxAry.Length);
+            Console.WriteLine(idxAry.Size);
             idxAry[0] = 0;
             idxAry[1] = 100;
             idxAry[2] = 200;
@@ -47,6 +47,8 @@ namespace SelfCSharp8_1
             idxAry[5] = 999;
             Console.WriteLine(idxAry[-1]);
             Console.WriteLine(idxAry[0]);
+
+            Console.WriteLine("---------------------------");
         }
     }
 }

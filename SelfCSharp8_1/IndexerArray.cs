@@ -12,8 +12,6 @@ namespace SelfCSharp8_1
         private int _size;
         // 配列本体
         private int[] _list;
-        // 配列の長さのプロパティ
-        private int _length;
 
         // コンストラクタ
         public IndexerArray(int size)
@@ -40,11 +38,11 @@ namespace SelfCSharp8_1
         }
 
         // 通常のプロパティ
-        public int Length
+        public int Size
         {
             get
             {
-                return _list.Length;
+                return _size;
             }
         }
 

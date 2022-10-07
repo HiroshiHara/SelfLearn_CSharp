@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SelfCSharp8_3
+namespace SelfCSharp8_3.parent
 {
     // abstract... 抽象クラス
     internal abstract class Figure

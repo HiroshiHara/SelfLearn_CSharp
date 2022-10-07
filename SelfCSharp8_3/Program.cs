@@ -1,6 +1,9 @@
 ﻿// 拡張メソッド使用にはそのメソッドの名前空間を指定する必要あり
 // この例は同じnamespaceに存在するので指定不要
 
+using SelfCSharp8_3.parent;
+using SelfCSharp8_3.sub;
+
 namespace SelfCSharp8_3
 {
     internal class Program

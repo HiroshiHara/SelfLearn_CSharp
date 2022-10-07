@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SelfCSharp8_3
 {
-    internal class Figure
+    // abstract... 抽象クラス
+    internal abstract class Figure
     {
         public double Width { get; set; }
         public double Height { get; set; }
@@ -18,9 +19,7 @@ namespace SelfCSharp8_3
         }
 
         // 面積を求めるメソッド
-        public virtual double GetArea()
-        {
-            return 0.0;
-        }
+        // abstract... 抽象メソッド
+        public abstract double GetArea();
     }
 }

@@ -22,5 +22,14 @@ namespace SelfCSharp8_3.Interface
         double GetArea();
 
         // イベント(割愛)
+
+        // デフォルト実装
+        // メソッド、プロパティ、インデクサー、イベント、staticメンバが定義可能。
+        // 修飾子の制限なし
+        public void Log(string message)
+        {
+            Console.WriteLine(message);
+        }
+
     }
 }

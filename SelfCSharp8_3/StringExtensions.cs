@@ -27,5 +27,16 @@ namespace SelfCSharp8_3
             }
             return sb.ToString();
         }
+
+        public static string ToTitleCase(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                throw new ArgumentException("文字列を指定してください。");
+            }
+            string upper = str.Substring(0, 1).ToUpper();
+            string lower = str.Substring(1).ToLower();
+            return upper + lower;
+        }
     }
 }

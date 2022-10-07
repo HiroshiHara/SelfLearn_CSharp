@@ -9,6 +9,16 @@ namespace SelfCSharp8_3
         {
             string repeat = "repeat";
             Console.WriteLine(repeat.Repeat(20));
+
+            Console.WriteLine("---------------------------");
+
+            // ポリモーフィズム
+            // メソッドの振る舞いは型でなくオブジェクトによって決定される
+            // 機能を差し替えるときは型を変更する必要は無く、インスタンスの差し替えで済む
+            Figure t = new Triangle(2, 20);
+            Console.WriteLine(t.GetArea());
+            Figure s = new Square(39, 2);
+            Console.WriteLine(s.GetArea());
         }
     }
 }

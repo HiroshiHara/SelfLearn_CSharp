@@ -4,13 +4,13 @@
     {
         public static void Main(string[] args)
         {
-            // try-catchによる例外処理
+            StreamReader sr = null;
+            // try-catch-finallyによる例外処理
+            // (リソースのクローズを目的にfinallyを使うよりはusing命令の方がシンプル)
             try
             {
-                using (var sr = new StreamReader(@"E:\Workspace\CSharp\SelfCSharp9_1\file\exception.log"))
-                {
-                    Console.WriteLine(sr.ReadToEnd());
-                }
+                sr = new StreamReader(@"E:\Workspace\CSharp\SelfCSharp9_1\file\exception.log");
+                Console.WriteLine(sr.ReadToEnd());
             } catch (FileNotFoundException ex)
             {
                 Console.WriteLine(ex.StackTrace);
@@ -39,6 +39,14 @@
                 if (method != null)
                 {
                     Console.WriteLine($"・現在の例外がスローされたメソッド={method.Name}");
+                }
+            }
+            finally
+            {
+                Console.WriteLine("finallyブロック...");
+                if (sr != null)
+                {
+                    sr.Close();
                 }
             }
         }

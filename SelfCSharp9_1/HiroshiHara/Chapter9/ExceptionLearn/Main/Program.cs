@@ -117,6 +117,10 @@
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                // 例外の再スローはthrow;とする
+                // throw exとすると、スタックトレースが現在の時点のもので上書きしてしまうから。
+                // exを省略することで現在の時点までのスタックトレースをそのまま再スロー出来る。
+                //throw;
             }
         }
     }

@@ -23,3 +23,12 @@ internal enum ProgramLang : int
     // 全てのメンバーの値を演算した結果を割り当てることもできる
     All = Java + CSharp + PHP + Python,
 }
+
+// ビットフィールドを利用する列挙型
+[Flags]
+internal enum FontStyle { 
+    Bold = 1, // 列挙定数には2の累乗を(0, 1, 2..)の順で指定
+    Italic = 2,
+    Underline = 4,
+    All = (Bold | Italic |Underline),
+}

@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="HiroshiHara\Chapter9\GenericLearn\Generic\" />
-  </ItemGroup>
-
 </Project>

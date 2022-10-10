@@ -32,6 +32,14 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             GetOutputProcess gop = GetWithBracket;
             gop += GetWithCanma;
             Console.WriteLine(ArrayWalk(ary, gop));
+
+            Console.WriteLine("---------------------------");
+
+            // 匿名メソッドを使用してデリゲートに渡すメソッド(=使い捨て)をその場で宣言できる
+            ArrayWalkAnonymous(ary, delegate (string s)
+            {
+                return $"[{s}]";
+            });
         }
 
         public static void Run(string s)
@@ -59,6 +67,17 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
                 result += process(val);
             }
             return result;
+        }
+
+        // 匿名メソッド用
+        // ★標準ライブラリで頻繁に使用するデリゲートは用意されている
+        // 下記例ではFunc<in T, out TResult>(T arg)を使用(引数Tを1つ、戻り値がT型)
+        public static void ArrayWalkAnonymous(string[] ary, Func<string, string> process)
+        {
+            foreach (var val in ary)
+            {
+                Console.WriteLine(process(val));
+            }
         }
 
         // OutputProcessに対応した処理

@@ -10,10 +10,28 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             // Process p = Runでも可
             p("Runメソッド");
             string[] ary = { "aaa", "bbb", "ccc" };
-            OutputProcess op1 = AddBracket;
+            OutputProcess? op1 = AddBracket;
             ArrayWalk(ary, op1);
-            OutputProcess op2 = AddCanma;
+            OutputProcess? op2 = AddCanma;
             ArrayWalk(ary, op2);
+
+            Console.WriteLine("---------------------------");
+
+            // マルチキャストデリゲート
+            // +=演算子で同時に複数の処理をデリゲートに渡す
+            op1 += op2;
+            ArrayWalk(ary, op1);
+            // -=演算子で登録済みの処理を解除することも可能
+            op1 -= op2;
+            ArrayWalk(ary, op1!);
+
+            Console.WriteLine("---------------------------");
+
+            // 戻り値のあるメソッドをマルチキャストデリゲートに渡した場合、
+            // 最後に実行したメソッドの結果が優先される
+            GetOutputProcess gop = GetWithBracket;
+            gop += GetWithCanma;
+            Console.WriteLine(ArrayWalk(ary, gop));
         }
 
         public static void Run(string s)
@@ -32,6 +50,17 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             }
         }
 
+        public static string ArrayWalk(string[] ary, GetOutputProcess process)
+        {
+            var result = "";
+            foreach (var val in ary)
+            {
+                // デリゲートの実行
+                result += process(val);
+            }
+            return result;
+        }
+
         // OutputProcessに対応した処理
         static void AddBracket(string str)
         {
@@ -41,6 +70,17 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
         static void AddCanma(string str)
         {
             Console.WriteLine($"{str},");
+        }
+
+        // GetOutputProcessに対応した処理
+        static string GetWithBracket(string str)
+        {
+            return $"[{str}]";
+        }
+
+        static string GetWithCanma(string str)
+        {
+            return $"{str},";
         }
     }
 }

@@ -13,4 +13,5 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Delegate
     // 同じシグニチャに対し、状況次第で複数の処理を用意できる
     delegate void Process(string str);
     delegate void OutputProcess(string str);
+    delegate string GetOutputProcess(string str);
 }

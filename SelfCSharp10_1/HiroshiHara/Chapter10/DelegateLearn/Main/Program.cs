@@ -40,6 +40,18 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             {
                 return $"[{s}]";
             });
+
+            Console.WriteLine("---------------------------");
+
+            // ラムダ式を利用して匿名メソッドを置き換え
+            ArrayWalkAnonymous(ary, (string s) =>
+            {
+                return $"[{s}]";
+            });
+            // 処理が1文のみならブロック省略可、return命令省略可
+            ArrayWalkAnonymous(ary, (string s) => $"[{s}]");
+            // 引数の方は暗黙的に推論されるので基本的に省略、引数が1つならカッコも省略
+            ArrayWalkAnonymous(ary, s => $"[{s}]");
         }
 
         public static void Run(string s)

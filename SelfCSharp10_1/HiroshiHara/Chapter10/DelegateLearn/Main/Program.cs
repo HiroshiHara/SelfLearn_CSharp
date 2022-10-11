@@ -79,8 +79,21 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             Console.WriteLine("---------------------------");
 
             // T? Find(Predicate<T> match)
-            var findResult = strList.Find(str => str.Equals("aaa"));
+            // 最初にtrueとなる要素を返す
+            var findResult = strList.Find(str => str.Equals("AAA"));
             Console.WriteLine(findResult);
+            Console.WriteLine("---------------------------");
+
+            // List<T>? FindAllList<T>(Predicate<T> match)
+            var findAllResult = strList.FindAll(str => str.StartsWith("B"));
+            findAllResult.ForEach(str => Console.WriteLine(str));
+            Console.WriteLine("---------------------------");
+
+            // 練習用
+            // リストの内容が全て5文字以内か否かを判定
+            var testList = new List<string>() { "af", "dafes", "daff", "dfad" };
+            Console.WriteLine(testList.TrueForAll(str => str.Length <= 5));
+
 
         }
 

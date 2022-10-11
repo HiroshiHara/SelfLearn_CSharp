@@ -29,7 +29,7 @@ namespace SelfCSharp10_2.HiroshiHara.Chapter10.LinqLearn.Main
             // 複数のプロパティを取得
             // (select句にカンマ区切りではNG)
             var bookList2 = from b in AppTables.Books
-                            where b.Publisher.Equals("翔泳社")
+                            where b.Publisher == "翔泳社"
                             select new { Title = b.Title, Price = b.Price };
             bookList2.ToList().ForEach(b => Console.Write($"{b} "));
             Console.WriteLine("\r\n---------------------------");
@@ -45,10 +45,11 @@ namespace SelfCSharp10_2.HiroshiHara.Chapter10.LinqLearn.Main
             Console.WriteLine("\r\n---------------------------");
 
             var bookList2_m = AppTables.Books
-                .Where(b => b.Publisher.Equals("翔泳社"))
+                .Where(b => b.Publisher == "翔泳社")
                 .Select(b => $"{b.Title}:{b.Price}");
             bookList2_m.ToList().ForEach(b => Console.Write($"{b} "));
             Console.WriteLine("\r\n---------------------------");
+            
         }
     }
 }

@@ -52,6 +52,36 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             ArrayWalkAnonymous(ary, (string s) => $"[{s}]");
             // 引数の方は暗黙的に推論されるので基本的に省略、引数が1つならカッコも省略
             ArrayWalkAnonymous(ary, s => $"[{s}]");
+
+            Console.WriteLine("---------------------------");
+
+            // 外部変数のキャプチャ
+            // ラムダ式で外部の変数(下記例では引数)を参照すると、
+            // ラムダ式が破棄されるまでその値を維持する
+            Action show = CreateAction(10);
+            show(); // 11
+            show(); // 12
+
+            Console.WriteLine("---------------------------");
+
+            // ラムダ式を伴うListクラスのメソッド
+            // void ForEach(Action<T> action)
+            var list = new List<int>() { 1, 4, 5, 3, 2, 6, 2, 1 };
+            list.ForEach(v => Console.Write($"{v * v},"));
+            Console.Write("\r\n");
+            Console.WriteLine("---------------------------");
+
+            // List<TOputput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
+            var strList = new List<string>() { "aaa", "bbb", "ccc" };
+            strList = strList.ConvertAll(str => str.ToUpper());
+            strList.ForEach(str => Console.Write($"{str},"));
+            Console.Write("\r\n");
+            Console.WriteLine("---------------------------");
+
+            // T? Find(Predicate<T> match)
+            var findResult = strList.Find(str => str.Equals("aaa"));
+            Console.WriteLine(findResult);
+
         }
 
         public static void Run(string s)
@@ -90,6 +120,17 @@ namespace SelfCSharp10_1.HiroshiHara.Chapter10.DelegateLearn.Main
             {
                 Console.WriteLine(process(val));
             }
+        }
+
+        // ラムダ式を返却するメソッド
+        public static Action CreateAction(int init)
+        {
+            int val = init;
+            return () =>
+            {
+                val++;
+                Console.WriteLine(val);
+            };
         }
 
         // OutputProcessに対応した処理

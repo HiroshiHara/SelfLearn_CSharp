@@ -54,8 +54,8 @@ namespace SelfCSharp10_2.HiroshiHara.Chapter10.LinqLearn.Main
             // 部分一致検索=Contains
             // 前方一致=StartsWith, 後方一致=EndsWith
             var contains1 = from b in AppTables.Books
-                           where b.Title.Contains("Android")
-                           select b;
+                            where b.Title.Contains("Android")
+                            select b;
             contains1.ToList().ForEach(b => Console.Write($"{b} "));
             Console.WriteLine("\r\n---------------------------");
 
@@ -100,6 +100,98 @@ namespace SelfCSharp10_2.HiroshiHara.Chapter10.LinqLearn.Main
             orderby2.ToList().ForEach(b => Console.WriteLine($"{b}"));
             Console.WriteLine("---------------------------");
 
+            // ★select句
+            // プロパティの加工/演算が可能
+            var select1 = from b in AppTables.Books
+                          select new
+                          {
+                              ShortTitle = b.Title.Substring(0, 5) + "...",
+                              DiscountPrice = b.Price * 0.9,
+                              isReleased = (b.Published <= DateTime.Now ? "発売中" : "発売予定")
+                          };
+            select1.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
+            var select2 = AppTables.Books
+                   .Select(b => new
+                   {
+                       ShortTitle = b.Title.Substring(0, 5) + "...",
+                       DiscountPrice = b.Price * 0.9,
+                       isReleased = (b.Published <= DateTime.Now ? "発売中" : "発売予定")
+                   });
+            select2.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
+            // Distinct
+            var distinct = AppTables.Books
+                .Select(b => b.Publisher)
+                .Distinct();
+            distinct.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
+            // group by
+            // group句/GroupBy()の戻り値は
+            // IEnumerable<IGrouping<K, S>>型
+            // Kがグループ化に使用したキー
+            // Sは集合
+            var groupby1 = from b in AppTables.Books
+                          group b by b.Publisher;
+            groupby1.ToList().ForEach(g =>
+            {
+                Console.WriteLine($"[{g.Key}]");
+                g.ToList().ForEach(b =>
+                {
+                    Console.WriteLine($"{b.Title}({b.Price})");
+                });
+            });
+            Console.WriteLine("---------------------------");
+
+            var groupby2 = AppTables.Books
+                .Select(b => b)
+                .GroupBy(b => b.Publisher);
+            groupby2.ToList().ForEach(g =>
+            {
+                Console.WriteLine($"[{g.Key}]");
+                g.ToList().ForEach(b =>
+                {
+                    Console.WriteLine($"{b.Title}({b.Price})");
+                });
+            });
+            Console.WriteLine("---------------------------");
+
+            // Join
+            // 内部結合のみ
+            // 外部結合は頑張る必要がある
+            var join1 = from b in AppTables.Books
+                        join r in AppTables.Reviews
+                        on b.Isbn equals r.Isbn
+                        select new
+                        {
+                            Title = b.Title,
+                            Reviewer = r.Name,
+                            Body = r.Body
+                        };
+            join1.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
+            // IEnumerable<TResult> Join(TOuter, TInner, TKey, TResult>(
+            //  IEnumerable<TInner> inner 結合する要素の型
+            //  Func<TOuter, TKey> outerkey 結合キー1
+            //  Func<TInner, TKey> innerkey 結合キー2
+            //  Func<TOuter, TInner, TResult> result 結合結果
+            var join2 = AppTables.Books.Join(
+                AppTables.Reviews,
+                b => b.Isbn,
+                r => r.Isbn,
+                (b, r) => new
+                {
+                    Title = b.Title,
+                    Reviewer = r.Name,
+                    Body = r.Body
+                }
+            );
+            join2.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
         }
     }
 }

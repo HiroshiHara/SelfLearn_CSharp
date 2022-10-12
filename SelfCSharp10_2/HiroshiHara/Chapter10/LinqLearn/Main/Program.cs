@@ -49,7 +49,57 @@ namespace SelfCSharp10_2.HiroshiHara.Chapter10.LinqLearn.Main
                 .Select(b => $"{b.Title}:{b.Price}");
             bookList2_m.ToList().ForEach(b => Console.Write($"{b} "));
             Console.WriteLine("\r\n---------------------------");
-            
+
+            // ★where句
+            // 部分一致検索=Contains
+            // 前方一致=StartsWith, 後方一致=EndsWith
+            var contains1 = from b in AppTables.Books
+                           where b.Title.Contains("Android")
+                           select b;
+            contains1.ToList().ForEach(b => Console.Write($"{b} "));
+            Console.WriteLine("\r\n---------------------------");
+
+            var contains2 = AppTables.Books
+                .Where(b => b.Title.Contains("Android"))
+                .Select(b => b);
+            contains2.ToList().ForEach(b => Console.Write($"{b} "));
+            Console.WriteLine("\r\n---------------------------");
+
+            // 候補値検索(IN句)
+            var in1 = from b in AppTables.Books
+                      where (new int[] { 3, 6 }.Contains(b.Published.Month))
+                      select (b);
+            in1.ToList().ForEach(b => Console.Write($"{b} "));
+            Console.WriteLine("\r\n---------------------------");
+
+            var in2 = AppTables.Books
+                .Where(b => new int[] { 3, 6 }.Contains(b.Published.Month))
+                .Select(b => b);
+            in2.ToList().ForEach(b => Console.Write($"{b} "));
+            Console.WriteLine("\r\n---------------------------");
+
+            // スカラ副問い合わせ(Whereの代わりにシングル)
+            // データ件数が2件以上の場合InvalidOperationException
+            var scalarSub = AppTables.Books
+                .Single(b => b.Isbn == "978-4-7981-6884-5");
+            Console.WriteLine(scalarSub.ToString());
+            Console.WriteLine("---------------------------");
+
+            // ★order by句
+            // 規定値=ascending=昇順
+            // descending=降順
+            var orderby1 = from b in AppTables.Books
+                           orderby b.Published descending
+                           select b;
+            orderby1.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
+            var orderby2 = AppTables.Books
+                .OrderByDescending(b => b.Published)
+                .Select(b => b);
+            orderby2.ToList().ForEach(b => Console.WriteLine($"{b}"));
+            Console.WriteLine("---------------------------");
+
         }
     }
 }

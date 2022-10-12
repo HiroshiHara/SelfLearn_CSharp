@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            //// ★クラシカルなスレッド処理
+            //Thread t1 = new Thread(Count);
+            //Thread t2 = new Thread(Count);
+            //Thread t3 = new Thread(Count);
+
+            //// スレッド開始
+            //t1.Start(1);
+            //t2.Start(2);
+            //t3.Start(3);
+
+            //// スレッド終了まで待機
+            //t1.Join();
+            //t2.Join();
+            //t3.Join();
+            //Console.WriteLine("全てのスレッドが終了。");
+
+            // ★スレッドプールを使用する(タスク)
+            // タスクを開始
+            Task t1 = Task.Run(() => Count(1));
+            Task t2 = Task.Run(() => Count(2));
+            Task t3 = Task.Run(() => Count(3));
+            // タスクの終了まで待機
+            t1.Wait();
+            t2.Wait();
+            t3.Wait();
+            Console.WriteLine("全てのタスクが終了。");
+        }
+
+        // クラシカルなスレッド処理(実処理)
+        static void Count(object? n)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                Console.WriteLine($"Thread{n}: {i}");
+            }
+        }
+    }
+}

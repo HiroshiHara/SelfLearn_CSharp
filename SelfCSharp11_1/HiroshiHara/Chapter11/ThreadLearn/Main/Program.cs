@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,23 @@ namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
             t2.Wait();
             t3.Wait();
             Console.WriteLine("全てのタスクが終了。");
+
+            // ★排他制御を行う
+            const int TaskNum = 50;
+            var ts = new Task[TaskNum];
+            var tb = new LockBasic();
+            // タスクを起動
+            for (int i = 0; i < TaskNum; i++)
+            {
+                ts[i] = Task.Run(() => tb.Increment());
+            }
+            // 各タスクの終了まで待機
+            for (int i = 0; i < TaskNum; i++)
+            {
+                ts[i].Wait();
+            }
+            // 実行結果の表示
+            Console.WriteLine(tb.Num);
         }
 
         // クラシカルなスレッド処理(実処理)

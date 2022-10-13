@@ -63,8 +63,23 @@ namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
             // ★非同期処理を行う
             var asyncb = new AsyncBasic();
             Task async = asyncb.RunAsync();
-            Console.WriteLine("---他の処理---");
+            Console.WriteLine("---メインスレッドの処理---");
             async.Wait();
+
+            Console.WriteLine("---------------------------");
+
+            // ★非同期処理から値を返却する
+            var asyncr = new AsyncReturn();
+            Task<TimeSpan> async2 = asyncr.RunAsync();
+            Console.WriteLine("---メインスレッドの処理---");
+            // 非同期処理の終了待ち
+            while (!async2.IsCompleted)
+            {
+                async2.Wait(200);
+                Console.Write(".");
+            }
+            Console.WriteLine(async2.Result);
+
         }
 
         // クラシカルなスレッド処理(実処理)

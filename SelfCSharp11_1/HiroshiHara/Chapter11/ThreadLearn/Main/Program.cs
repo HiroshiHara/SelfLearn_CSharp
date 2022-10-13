@@ -80,6 +80,14 @@ namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
             }
             Console.WriteLine(async2.Result);
 
+            Console.WriteLine("---------------------------");
+
+            // ★非同期処理でインターネットのコンテンツを取得
+            var asyncHttp = new AsyncHttp();
+            Task asyncHttpResult = asyncHttp.GetHttpContentsAsync();
+            Console.WriteLine("---メインスレッドの処理---");
+            asyncHttpResult.Wait();
+
         }
 
         // クラシカルなスレッド処理(実処理)

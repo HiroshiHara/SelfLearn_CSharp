@@ -39,6 +39,8 @@ namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
             t3.Wait();
             Console.WriteLine("全てのタスクが終了。");
 
+            Console.WriteLine("---------------------------");
+
             // ★排他制御を行う
             const int TaskNum = 50;
             var ts = new Task[TaskNum];
@@ -55,6 +57,14 @@ namespace SelfCSharp11_1.HiroshiHara.Chapter11.ThreadLearn.Main
             }
             // 実行結果の表示
             Console.WriteLine(tb.Num);
+
+            Console.WriteLine("---------------------------");
+
+            // ★非同期処理を行う
+            var asyncb = new AsyncBasic();
+            Task async = asyncb.RunAsync();
+            Console.WriteLine("---他の処理---");
+            async.Wait();
         }
 
         // クラシカルなスレッド処理(実処理)
